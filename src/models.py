@@ -10,22 +10,17 @@ Base = declarative_base()
 
 class Follower(Base):
     __tablename__ = 'Follower'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     user_from_id = Column(Integer, ForeignKey('User.id'))
     user_to_id = Column(Integer, ForeignKey('User.id'))
 
 class User(Base):
     __tablename__ = 'User'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     username = Column(String(250))
     firstname = Column(String(250))
     lastname =  Column(String(250))
     email = Column(String(250), nullable=False)
-    # person = relationship(Person)
 
 class Post(Base):
     __tablename__='Post'
@@ -50,5 +45,4 @@ class Media(Base):
     def to_dict(self):
         return {}
 
-## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')

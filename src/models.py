@@ -30,15 +30,15 @@ class Post(Base):
 class Comment(Base):
     __tablename__='Comment'
     id = Column(Integer, primary_key=True)
-    comment_text = Column(String)
+    comment_text = Column(String(255))
     author_id = Column(Integer,ForeignKey('User.id'))
     post_id = Column(Integer, ForeignKey('Post.id'))
 
 class Media(Base):
     __tablename__='Media'
     id = Column(Integer,primary_key=True)
-    type = Column(Enum)
-    url = Column(String)
+    type = Column(Enum(enumerate))
+    url = Column(String(255))
     post_id = Column(Integer, ForeignKey('Post.id'))
 
 

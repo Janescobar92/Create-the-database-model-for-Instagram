@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, Enum
+from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -12,9 +12,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'User'
     id = Column(Integer, primary_key=True)
-    username = Column(String(250))
-    firstname = Column(String(250))
-    lastname =  Column(String(250))
+    username = Column(String(50))
+    firstname = Column(String(255))
+    lastname =  Column(String(255))
     email = Column(String(250), nullable=False)
 
 class Post(Base):
@@ -25,7 +25,7 @@ class Post(Base):
 class Comment(Base):
     __tablename__='Comment'
     id = Column(Integer, primary_key=True)
-    comment_text = Column(String(255))
+    comment_text = Column(Text())
     author_id = Column(Integer,ForeignKey('User.id'))
     post_id = Column(Integer, ForeignKey('Post.id'))
 
@@ -33,7 +33,7 @@ class Media(Base):
     __tablename__='Media'
     id = Column(Integer,primary_key=True)
     type_of = Column(Enum("video","image", "audio"))
-    url = Column(String(255))
+    url = Column(Text())
     post_id = Column(Integer, ForeignKey('Post.id'))
 
 class Follower(Base):

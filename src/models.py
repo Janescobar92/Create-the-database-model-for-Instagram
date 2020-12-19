@@ -8,11 +8,6 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-class Follower(Base):
-    __tablename__ = 'Follower'
-    id = Column(Integer, primary_key=True)
-    user_from_id = Column(Integer, ForeignKey('User.id'))
-    user_to_id = Column(Integer, ForeignKey('User.id'))
 
 class User(Base):
     __tablename__ = 'User'
@@ -37,10 +32,15 @@ class Comment(Base):
 class Media(Base):
     __tablename__='Media'
     id = Column(Integer,primary_key=True)
-    type = Column(Enum(enumerate))
+    type_of = Column(Enum("video","image", "audio"))
     url = Column(String(255))
     post_id = Column(Integer, ForeignKey('Post.id'))
 
+class Follower(Base):
+    __tablename__ = 'Follower'
+    id = Column(Integer, primary_key=True)
+    user_from_id = Column(Integer, ForeignKey('User.id'))
+    user_to_id = Column(Integer, ForeignKey('User.id'))
 
     def to_dict(self):
         return {}
